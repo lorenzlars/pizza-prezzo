@@ -13,7 +13,7 @@ struct Pizza_CalculatorApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CalculatorView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

@@ -13,10 +13,21 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-        }
+        
+        let size1 = Size(context: viewContext)
+        size1.radius = 20
+        
+        let size2 = Size(context: viewContext)
+        size2.radius = 22
+        
+        let size3 = Size(context: viewContext)
+        size3.width = 26
+        size3.height = 30
+        
+        let size4 = Size(context: viewContext)
+        size4.radius = 28
+        
+        
         do {
             try viewContext.save()
         } catch {
