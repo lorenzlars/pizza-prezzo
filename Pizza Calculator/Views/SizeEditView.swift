@@ -9,12 +9,11 @@ import SwiftUI
 import CoreData
 
 struct SizeEditView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.managedObjectContext) private var viewContext
     
     private enum SizeType {
        case Round
-       case Square
+       case Rectangular
     }
     
     private var isEditing: Bool {
@@ -22,27 +21,26 @@ struct SizeEditView: View {
     }
     
     @State private var sizeType: SizeType = SizeType.Round
-    @State private var radius: String = ""
+    @State private var diameter: String = ""
     @State private var width: String = ""
     @State private var height: String = ""
     
-    @State private var size: Size?
+    private var size: Size?
     private var onDismiss: (() -> Void)?
     
-    init(size: Size?) {
-        self._size = State(initialValue: size)
+    init(size: Size, onDismiss: @escaping () -> Void) {
+        self.size = size
+        self.onDismiss = onDismiss
         
-        if let s = size {
-            if let radius = s.radius {
-                self._radius = State(initialValue: "\(radius)")
-                self._sizeType = State(initialValue: SizeType.Round)
-            }
-            
-            if let width = s.width, let height = s.height {
-                self._width = State(initialValue: "\(width)")
-                self._height = State(initialValue: "\(height)")
-                self._sizeType = State(initialValue: SizeType.Square)
-            }
+        if let diameter = size.diameter {
+            self._diameter = State(initialValue: "\(diameter)")
+            self._sizeType = State(initialValue: SizeType.Round)
+        }
+        
+        if let width = size.width, let height = size.height {
+            self._width = State(initialValue: "\(width)")
+            self._height = State(initialValue: "\(height)")
+            self._sizeType = State(initialValue: SizeType.Rectangular)
         }
     }
     
@@ -54,21 +52,21 @@ struct SizeEditView: View {
         GeometryReader { geo in
             VStack(alignment: .leading) {
                 Picker(selection: self.$sizeType, label: Text("Picker")) {
-                    Text("Round").tag(SizeType.Round)
-                    Text("Square").tag(SizeType.Square)
+                    Text("round").tag(SizeType.Round)
+                    Text("rectangular").tag(SizeType.Rectangular)
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 if self.sizeType == SizeType.Round {
-                    TextField("Radius", text: self.$radius)
+                    TextField("diameter", text: self.$diameter)
                         .keyboardType(.numberPad)
                 }
-                if self.sizeType == SizeType.Square {
-                    TextField("Width", text: self.$width)
+                if self.sizeType == SizeType.Rectangular {
+                    TextField("width", text: self.$width)
                         .keyboardType(.numberPad)
-                    TextField("Height", text: self.$height)
+                    TextField("height", text: self.$height)
                         .keyboardType(.numberPad)
                 }
-                Button("Save") {
+                Button("save") {
                     if self.isEditing {
                         updateItem()
                     } else {
@@ -77,8 +75,6 @@ struct SizeEditView: View {
                     
                     if let onDismiss = self.onDismiss {
                         onDismiss()
-                    } else {
-                        self.presentationMode.wrappedValue.dismiss()
                     }
                 }
                 Spacer()
@@ -90,56 +86,58 @@ struct SizeEditView: View {
     
     private func addItem() {
         withAnimation {
-            let newItem = Size(context: viewContext)
-            
             if self.sizeType == SizeType.Round {
-                if let radius = Int(self.radius) {
-                    newItem.radius = NSNumber(value: radius)
+                if let diameter = Double(self.diameter) {
+                    let newItem = Size(context: viewContext)
+                    
+                    newItem.id = UUID().uuidString
+                    newItem.diameter = NSNumber(value: diameter)
+                    
+                    try! viewContext.save()
                 }
-            } else if (self.sizeType == SizeType.Square) {
-                if let width = Int(self.width) {
+            } else if (self.sizeType == SizeType.Rectangular) {
+                if let width = Double(self.width), let height = Double(self.height) {
+                    let newItem = Size(context: viewContext)
+                    
+                    newItem.id = UUID().uuidString
                     newItem.width = NSNumber(value: width)
-                }
-                
-                if let height = Int(self.height) {
                     newItem.height = NSNumber(value: height)
+
+                    try! viewContext.save()
                 }
             }
-
-            try! viewContext.save()
         }
     }
     
     private func updateItem() {
         withAnimation {
             if self.sizeType == SizeType.Round, let size = self.size {
-                if let radius = Int(self.radius) {
-                    size.radius = NSNumber(value: radius)
-                    size.height = nil
+                if let diameter = Double(self.diameter) {
+                    size.diameter = NSNumber(value: diameter)
                     size.width = nil
+                    size.height = nil
+                    
+                    try! viewContext.save()
                 }
             }
             
-            if self.sizeType == SizeType.Square, let size = self.size {
-                if let width = Int(self.width), let height = Int(self.height) {
-                    size.radius = nil
+            if self.sizeType == SizeType.Rectangular, let size = self.size {
+                if let width = Double(self.width), let height = Double(self.height) {
+                    size.diameter = nil
                     size.width = NSNumber(value: width)
                     size.height = NSNumber(value: height)
+                    
+                    try! viewContext.save()
                 }
             }
-             
-            try! viewContext.save()
         }
     }
 }
 
 struct SizeEditView_Previews: PreviewProvider {
     static var previews: some View {
-        let context = PersistenceController.preview.container.viewContext
-        let fetchRequest = NSFetchRequest<Size>(entityName: "Size")
-        let sizes = try! context.fetch(fetchRequest)
-        
-        SizeEditView(size: sizes[0])
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        SizeEditView {
+            
+        }
     }
 }

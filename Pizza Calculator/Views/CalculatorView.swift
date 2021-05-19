@@ -1,70 +1,135 @@
 //
-//  CalculatorView.swift
+//  TestView.swift
 //  Pizza Calculator
 //
-//  Created by Lars Lorenz on 02.05.21.
+//  Created by Lars Lorenz on 15.05.21.
 //
 
 import SwiftUI
-import CoreData
+import SwiftUITrackableScrollView
 
 struct CalculatorView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @State private var isShowingDetailView = false
-    @ObservedObject var calculator: Calculator = Calculator()
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Size.id, ascending: true)],
+        animation: .default)
+    private var sizes: FetchedResults<Size>
+    
+    @State private var isEditing: Bool = false
+    @State private var scrollViewContentOffset = CGFloat(0)
+    @State private var showingSheet = false
+    @State private var showingSupport = false
+    @ObservedObject var calculator: Calculator = Calculator.shared
     
     var body: some View {
-        NavigationView {
-            ScrollView {
-                NavigationLink(destination: SizeListView(beforeDismiss: {
-                    initCalculator()
-                }), isActive: $isShowingDetailView) {
-                    EmptyView()
+        ZStack(alignment: .top) {
+            ZStack {
+                HStack {
+                    Button(action: {
+                        self.isEditing.toggle()
+                    }, label: {
+                        if self.isEditing {
+                            Text("done")
+                                .fontWeight(.bold)
+                        } else {
+                            Text("edit")
+                                .fontWeight(.bold)
+                        }
+                    })
+                    Spacer()
+                    Button(action: {
+                        self.showingSheet.toggle()
+                    }, label: {
+                        Image(systemName: "plus.circle")
+                            .resizable()
+                            .frame(width: 22, height: 22)
+                    })
                 }
-                VStack(alignment: .leading) {
-                    ForEach(self.calculator.sizes) { size in
-                        Text("\(size.title)")
-                        TextField("Preis", text: size.value)
-                            .keyboardType(.decimalPad)
-                    }
-                    Text("Results")
-                        .font(.largeTitle)
+                HStack {
+                    Spacer()
+                    Text("appTitle")
                         .fontWeight(.bold)
+                        .opacity(Double((self.scrollViewContentOffset - 35) / 60))
+                    Spacer()
+                }
+            }
+            .padding(.horizontal)
+            .padding(.bottom, 8)
+            .background(Color(.white))
+            .zIndex(2)
+            TrackableScrollView(.vertical, showIndicators: false, contentOffset: $scrollViewContentOffset) {
+                VStack(alignment: .leading) {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("appTitle")
+                                .font(.largeTitle)
+                                .fontWeight(.bold)
+                            Text("appSubtitle")
+                                .font(.caption)
+                                .foregroundColor(Color(UIColor.systemGray))
+                        }
+                        Spacer()
+                    }
+                    .padding(.top, 50)
+                    .padding(.bottom)
+                    ForEach(self.sizes) { size in
+                        PriceLineView(isEditing: self.$isEditing, size: size)
+                    }
+                }
+                .padding(.horizontal)
+                VStack(alignment: .leading) {
+                    Text("results")
+                        .fontWeight(.heavy)
                         .padding(.bottom)
-                    ForEach(self.calculator.results) { result in
-                        if result.result != "" {
-                            HStack {
-                                Text("\(result.title)")
-                                Spacer()
-                                Text("Preis: \(result.result) €")
-                            }.padding(.bottom)
+                    if self.calculator.results.count > 0 {
+                        ForEach(self.calculator.results) { result in
+                            ResultLineView(price: result.price, size: result.title, area: result.area, result: result.value)
+                                .padding(.bottom)
+                        }
+                    } else {
+                        HStack {
+                            Spacer()
+                            Text("emptyResults")
+                            Spacer()
                         }
                     }
-                    
                 }
                 .padding()
+                .background(Color("AccentColor"))
+                .cornerRadius(12)
+                .padding(.top, 25)
+                .padding(.horizontal)
+                Button(action: {
+                    self.showingSupport.toggle()
+                }, label: {
+                    Text("support")
+                        .fontWeight(.bold)
+                        .foregroundColor(Color(UIColor.systemGray3))
+                })
+                .padding(.top, 8)
+                .sheet(isPresented: self.$showingSupport, content: {
+                    
+                })
             }
-            .navigationTitle("Pizza Calculator")
-            .navigationBarItems(trailing: Button("Sizes", action: {
-                isShowingDetailView.toggle()
-            }) )
+            .padding(.top)
+            .zIndex(1)
+            .onChange(of: self.scrollViewContentOffset) { Equatable in
+                if self.scrollViewContentOffset > 25 {
+                    hideKeyboard()
+                }
+            }
         }
-        .onAppear(perform: initCalculator)
-    }
-    
-    func initCalculator() -> Void {
-        let request: NSFetchRequest<Size> = Size.fetchRequest()
-        let fetchResult = try! viewContext.fetch(request)
-        
-        self.calculator.clear()
-        
-        for index in fetchResult.indices {
-            self.calculator.add(size: fetchResult[index], at: index)
+        .padding(.top, 50)
+        .ignoresSafeArea()
+        .sheet(isPresented: self.$showingSheet) {
+            SizeEditView {
+                self.showingSheet.toggle()
+            }
         }
     }
 }
 
-struct CalculatorView_Previews: PreviewProvider {
+struct TestView_Previews: PreviewProvider {
     static var previews: some View {
         CalculatorView()
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)

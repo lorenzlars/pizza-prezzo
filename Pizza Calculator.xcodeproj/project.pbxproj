@@ -3,21 +3,25 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		462634BC2654F7C800E9AC41 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 462634BE2654F7C800E9AC41 /* Localizable.strings */; };
 		4646CA9026472841006AEF42 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4646CA8F26472841006AEF42 /* Calculator.swift */; };
 		465049A1263F282B007410D4 /* Pizza_CalculatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465049A0263F282B007410D4 /* Pizza_CalculatorApp.swift */; };
-		465049A3263F282B007410D4 /* SizeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465049A2263F282B007410D4 /* SizeListView.swift */; };
 		465049A5263F282C007410D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 465049A4263F282C007410D4 /* Assets.xcassets */; };
 		465049A8263F282C007410D4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 465049A7263F282C007410D4 /* Preview Assets.xcassets */; };
 		465049AA263F282C007410D4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465049A9263F282C007410D4 /* Persistence.swift */; };
 		465049AD263F282C007410D4 /* Pizza_Calculator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 465049AB263F282C007410D4 /* Pizza_Calculator.xcdatamodeld */; };
 		465049B8263F282C007410D4 /* Pizza_CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465049B7263F282C007410D4 /* Pizza_CalculatorTests.swift */; };
 		465049C3263F282C007410D4 /* Pizza_CalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465049C2263F282C007410D4 /* Pizza_CalculatorUITests.swift */; };
-		465049DD263F3A02007410D4 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465049DC263F3A02007410D4 /* CalculatorView.swift */; };
 		465049DF263F3C4B007410D4 /* SizeEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465049DE263F3C4B007410D4 /* SizeEditView.swift */; };
+		467661BF265542E7006B42B0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467661BE265542E7006B42B0 /* Extensions.swift */; };
+		46A4F29D26510C3C00F0984E /* ResultLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A4F29C26510C3C00F0984E /* ResultLineView.swift */; };
+		46A4F29F26510D6500F0984E /* PriceLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A4F29E26510D6500F0984E /* PriceLineView.swift */; };
+		46D0510D2650633300A0B969 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D0510C2650633300A0B969 /* CalculatorView.swift */; };
+		46D05110265088CE00A0B969 /* SwiftUITrackableScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 46D0510F265088CE00A0B969 /* SwiftUITrackableScrollView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,10 +42,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		462634BF2654F83100E9AC41 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4646CA8F26472841006AEF42 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		4650499D263F282B007410D4 /* Pizza Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pizza Calculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		465049A0263F282B007410D4 /* Pizza_CalculatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pizza_CalculatorApp.swift; sourceTree = "<group>"; };
-		465049A2263F282B007410D4 /* SizeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeListView.swift; sourceTree = "<group>"; };
 		465049A4263F282C007410D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		465049A7263F282C007410D4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		465049A9263F282C007410D4 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -53,8 +57,12 @@
 		465049BE263F282C007410D4 /* Pizza CalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pizza CalculatorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		465049C2263F282C007410D4 /* Pizza_CalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pizza_CalculatorUITests.swift; sourceTree = "<group>"; };
 		465049C4263F282C007410D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		465049DC263F3A02007410D4 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		465049DE263F3C4B007410D4 /* SizeEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeEditView.swift; sourceTree = "<group>"; };
+		467661BD2655389D006B42B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		467661BE265542E7006B42B0 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		46A4F29C26510C3C00F0984E /* ResultLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultLineView.swift; sourceTree = "<group>"; };
+		46A4F29E26510D6500F0984E /* PriceLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceLineView.swift; sourceTree = "<group>"; };
+		46D0510C2650633300A0B969 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46D05110265088CE00A0B969 /* SwiftUITrackableScrollView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,9 +94,8 @@
 		4646CA8D264727F9006AEF42 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				465049DC263F3A02007410D4 /* CalculatorView.swift */,
-				465049A2263F282B007410D4 /* SizeListView.swift */,
 				465049DE263F3C4B007410D4 /* SizeEditView.swift */,
+				46D0510C2650633300A0B969 /* CalculatorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -129,6 +137,9 @@
 				465049AB263F282C007410D4 /* Pizza_Calculator.xcdatamodeld */,
 				465049A0263F282B007410D4 /* Pizza_CalculatorApp.swift */,
 				465049A9263F282C007410D4 /* Persistence.swift */,
+				467661BE265542E7006B42B0 /* Extensions.swift */,
+				462634BE2654F7C800E9AC41 /* Localizable.strings */,
+				46A4F29B26510C1700F0984E /* Components */,
 				4646CA8D264727F9006AEF42 /* Views */,
 				4646CA8E26472800006AEF42 /* Model */,
 			);
@@ -161,6 +172,15 @@
 			path = "Pizza CalculatorUITests";
 			sourceTree = "<group>";
 		};
+		46A4F29B26510C1700F0984E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				46A4F29C26510C3C00F0984E /* ResultLineView.swift */,
+				46A4F29E26510D6500F0984E /* PriceLineView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -177,6 +197,9 @@
 			dependencies = (
 			);
 			name = "Pizza Calculator";
+			packageProductDependencies = (
+				46D0510F265088CE00A0B969 /* SwiftUITrackableScrollView */,
+			);
 			productName = "Pizza Calculator";
 			productReference = 4650499D263F282B007410D4 /* Pizza Calculator.app */;
 			productType = "com.apple.product-type.application";
@@ -246,8 +269,12 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = 46504994263F282B007410D4;
+			packageReferences = (
+				46D0510E265088CE00A0B969 /* XCRemoteSwiftPackageReference "trackable-scroll-view" */,
+			);
 			productRefGroup = 4650499E263F282B007410D4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -265,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				465049A8263F282C007410D4 /* Preview Assets.xcassets in Resources */,
+				462634BC2654F7C800E9AC41 /* Localizable.strings in Resources */,
 				465049A5263F282C007410D4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,11 +319,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				465049AD263F282C007410D4 /* Pizza_Calculator.xcdatamodeld in Sources */,
+				467661BF265542E7006B42B0 /* Extensions.swift in Sources */,
+				46A4F29D26510C3C00F0984E /* ResultLineView.swift in Sources */,
 				465049AA263F282C007410D4 /* Persistence.swift in Sources */,
 				4646CA9026472841006AEF42 /* Calculator.swift in Sources */,
-				465049A3263F282B007410D4 /* SizeListView.swift in Sources */,
+				46A4F29F26510D6500F0984E /* PriceLineView.swift in Sources */,
+				46D0510D2650633300A0B969 /* CalculatorView.swift in Sources */,
 				465049DF263F3C4B007410D4 /* SizeEditView.swift in Sources */,
-				465049DD263F3A02007410D4 /* CalculatorView.swift in Sources */,
 				465049A1263F282B007410D4 /* Pizza_CalculatorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,11 +361,24 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		462634BE2654F7C800E9AC41 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				462634BF2654F83100E9AC41 /* de */,
+				467661BD2655389D006B42B0 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		465049C5263F282C007410D4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -397,6 +440,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -616,6 +660,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		46D0510E265088CE00A0B969 /* XCRemoteSwiftPackageReference "trackable-scroll-view" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/maxnatchanon/trackable-scroll-view.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		46D0510F265088CE00A0B969 /* SwiftUITrackableScrollView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 46D0510E265088CE00A0B969 /* XCRemoteSwiftPackageReference "trackable-scroll-view" */;
+			productName = SwiftUITrackableScrollView;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		465049AB263F282C007410D4 /* Pizza_Calculator.xcdatamodeld */ = {

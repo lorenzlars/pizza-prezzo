@@ -15,17 +15,21 @@ struct PersistenceController {
         let viewContext = result.container.viewContext
         
         let size1 = Size(context: viewContext)
-        size1.radius = 20
+        size1.id = UUID().uuidString
+        size1.diameter = 20
         
         let size2 = Size(context: viewContext)
-        size2.radius = 22
+        size2.id = UUID().uuidString
+        size2.diameter = 22
         
         let size3 = Size(context: viewContext)
+        size3.id = UUID().uuidString
         size3.width = 26
         size3.height = 30
         
         let size4 = Size(context: viewContext)
-        size4.radius = 28
+        size4.id = UUID().uuidString
+        size4.diameter = 28
         
         
         do {

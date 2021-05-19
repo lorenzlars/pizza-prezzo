@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  Pizza Calculator
+
+  Created by Lars Lorenz on 19.05.21.
+  
+*/
+"appTitle" = "Pizza Calculator";
+"appSubtitle" = "Calculate the best price";
+"price" = "Price";
+"emptyResults" = "No results";
+"edit" = "Edit";
+"done" = "Done";
+"results" = "Results";
+"round" = "Round";
+"rectangular" = "Rectangular";
+"diameter" = "Diameter";
+"width" = "Width";
+"height" = "Height";
+"save" = "Save";
+"support" = "Support";
+"area" = "Area";

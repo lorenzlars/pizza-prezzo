@@ -7,63 +7,105 @@
 
 import Foundation
 import SwiftUI
-
-struct CalculatorSize: Identifiable {
-    var id = UUID()
-    var title: String
-    var value: Binding<String>
-}
+import CoreData
 
 struct CalculatorResult: Identifiable {
-    var id = UUID()
+    var id: String
     var title: String
-    var result: String
+    var value: String
+    var area: String
+    var price: String
+    var rawValue: Double
 }
 
 class Calculator: ObservableObject {
-    // @Publisher observes all changes of all nested properties; You have nothing to do
-    @Published var sizes: [CalculatorSize] = []
     @Published var results: [CalculatorResult] = []
     
-    func clear() -> Void {
-        self.sizes.removeAll()
-        self.results.removeAll()
+    static let shared = Calculator()
+    
+    private init() { }
+    
+    func deleteResult(size: Size) -> Void {
+        self.results = self.results.filter { $0.id != size.id }
     }
     
-    func add(size: Size, at index: Int) -> Void {
-        let title: String = Calculator.calcTitle(ofSize: size)
-        let calculatorResult: CalculatorResult = CalculatorResult(title: title, result: "")
-        var value: String = ""
+    func calculateResult(size: Size, price: String) -> Void {
+        let title = self.calcTitle(ofSize: size)
+        let area = self.calcAreaWith(size: size)
         
-        results.insert(calculatorResult, at: index)
-        
-        let calculatorSize: CalculatorSize = CalculatorSize(title: title, value: Binding(get: {
-            value
-        }, set: { newValue in
-            // This is where the magic happens
-            // The bindable is is used to store the value and to calculate the result
-            // The result needs to be wirtten direclty into the self property
-            // so that the @Published can recognice the changes.
-            value = newValue
-            let pricePerArea = Calculator.calc(price: Double(newValue) ?? 0, perArea: Calculator.calcArea(ofSize: size))
-            let formattedPrice = String(format: "%.2f", pricePerArea)
-            self.results[index].result = formattedPrice
-            self.results.sort { a, b in
-                return Float(a.result) ?? 0 > Float(b.result) ?? 0
+        if let index = self.results.firstIndex(where: { result in
+            result.id == size.id
+        }) {
+            if let price = Double(self.formatPriceString(price: price)) {
+                let value = calculatePrice(price: price, area: area)
+                
+                self.results[index].title = title
+                self.results[index].value = self.format(value: value)
+                self.results[index].area = self.format(area: area)
+                self.results[index].price = self.format(price: price)
+                self.results[index].rawValue = value
+            } else {
+                self.results.remove(at: index)
             }
-        }))
+        } else if let price = Double(self.formatPriceString(price: price)) {
+            let value = calculatePrice(price: price, area: area)
+            
+            self.results.append(CalculatorResult(id: size.id!,
+                                                 title: title,
+                                                 value: self.format(value: value),
+                                                 area: self.format(area: area),
+                                                 price: self.format(price: price),
+                                                 rawValue: price))
+        }
         
-        sizes.insert(calculatorSize, at: index)
+        self.results.sort { a, b in
+            return a.rawValue < b.rawValue
+        }
     }
     
-    private static func calc(price: Double, perArea area: Double) -> Double {
-        return price / area * 1000
+    private func formatPriceString(price: String) -> String {
+        return price.replacingOccurrences(of: ",", with: ".")
     }
     
-    public static func calcTitle(ofSize size: Size) -> String {
-        if let radius = size.radius {
-            // TODO: i18n for radius
-            return "Radius \(radius)"
+    private func calculatePrice(price: Double, area: Double) -> Double {
+        return price / area * 100
+    }
+    
+    private func format(value: Double) -> String {
+        let formatter = NumberFormatter()
+        
+        formatter.usesGroupingSeparator = false
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 3
+        formatter.locale = Locale.current
+        
+        return formatter.string(from: NSNumber(value: value))!
+    }
+    
+    private func format(area: Double) -> String {
+        let formatter = NumberFormatter()
+        
+        formatter.usesGroupingSeparator = false
+        formatter.maximumFractionDigits = 2
+        formatter.numberStyle = .decimal
+        formatter.locale = Locale.current
+        
+        return formatter.string(from: NSNumber(value: area))!
+    }
+    
+    private func format(price: Double) -> String {
+        let formatter = NumberFormatter()
+        
+        formatter.usesGroupingSeparator = false
+        formatter.numberStyle = .currency
+        formatter.locale = Locale.current
+        
+        return formatter.string(from: NSNumber(value: price))!
+    }
+    
+    private func calcTitle(ofSize size: Size) -> String {
+        if let radius = size.diameter {
+            return "\(radius) Ø"
         }
         
         if let width = size.width, let height = size.height {
@@ -73,13 +115,13 @@ class Calculator: ObservableObject {
         return ""
     }
     
-    private static func calcArea(ofSize size: Size) -> Double {
-        if let radius = size.radius {
-            return Double.pi * Double(truncating: radius) * Double(truncating: radius)
+    private func calcAreaWith(size: Size) -> Double {
+        if let diameter = size.diameter {
+            return Double.pi * pow(Double(truncating: diameter) / 2, 2)
         }
 
         if let width = size.width, let heigth = size.height {
-            return Double(truncating: width) * Double(truncating:heigth)
+            return Double(truncating: width) * Double(truncating: heigth)
         }
         
         return 0
