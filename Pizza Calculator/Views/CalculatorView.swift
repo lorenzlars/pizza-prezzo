@@ -40,7 +40,7 @@ struct CalculatorView: View {
                     Button(action: {
                         self.showingSheet.toggle()
                     }, label: {
-                        Image(systemName: "plus.circle")
+                        Image(systemName: "plus.circle.fill")
                             .resizable()
                             .frame(width: 22, height: 22)
                     })

@@ -61,30 +61,30 @@ struct PriceLineView: View {
                     Text("\(Locale.current.currencySymbol!)")
                 }
                 .padding(.vertical, 8)
-                .padding(.horizontal, 12)
-                .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(UIColor.systemGray3), lineWidth: 2))
-                .cornerRadius(8)
+                .padding(.horizontal, 8)
+                .overlay(RoundedRectangle(cornerRadius: 6).stroke(Color(UIColor.systemGray5), lineWidth: 2))
+                .cornerRadius(6)
                 
             }
             .background(Color(.white))
             .zIndex(2)
-            .padding(.trailing, self.isEditing ? 80 : 0)
-            HStack {
+            .padding(.trailing, self.isEditing ? CGFloat(80) : CGFloat(0))
+            HStack(spacing: 14) {
                 Button(action: {
                     self.showingSheet.toggle()
                 }, label: {
-                    Image(systemName: "pencil.circle")
+                    Image(systemName: "pencil.circle.fill")
                         .resizable()
-                        .foregroundColor(Color(UIColor.systemBlue))
-                        .frame(width: 30, height: 30)
+                        .foregroundColor(Color("AccentColor"))
+                        .frame(width: 25, height: 25)
                 })
                 Button(action: {
                     self.deleteSize(size: self.size)
                 }, label: {
-                    Image(systemName: "minus.circle")
+                    Image(systemName: "minus.circle.fill")
                         .resizable()
                         .foregroundColor(Color(UIColor.systemRed))
-                        .frame(width: 30, height: 30)
+                        .frame(width: 25, height: 25)
                 })
             }
             .zIndex(1)

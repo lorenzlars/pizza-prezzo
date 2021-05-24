@@ -7,6 +7,10 @@
 */
 "appTitle" = "Pizza Rechner";
 "appSubtitle" = "Berechnen den besten Preis";
+"editTitle" = "Größe bearbeiten";
+"editSubtitle" = "Bearbeite die Größe dieser Pizza";
+"createTitle" = "Größe erstellen";
+"createSubtitle" = "Erstelle eine neue Pizzagröße";
 "price" = "Preis";
 "emptyResults" = "Kein Ergebnis";
 "edit" = "Bearbeiten";

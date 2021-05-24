@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 import CoreData
 
 struct SizeEditView: View {
@@ -18,6 +19,18 @@ struct SizeEditView: View {
     
     private var isEditing: Bool {
         return self.size != nil
+    }
+    
+    private var canSave: Bool {
+        if self.sizeType == SizeType.Round {
+            return self.diameter.count > 0
+        }
+        
+        if self.sizeType == SizeType.Rectangular {
+            return self.width.count > 0 && self.height.count > 0
+        }
+        
+        return false
     }
     
     @State private var sizeType: SizeType = SizeType.Round
@@ -49,39 +62,91 @@ struct SizeEditView: View {
     }
 
     var body: some View {
-        GeometryReader { geo in
             VStack(alignment: .leading) {
+                HStack {
+                    Spacer()
+                    Rectangle()
+                        .frame(width: 60, height: 6)
+                        .cornerRadius(.infinity)
+                        .foregroundColor(Color(UIColor.systemGray4))
+                    Spacer()
+                }
+                .padding(.bottom, 50)
+                Text(self.isEditing ? "editTitle" : "createTitle")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                Text(self.isEditing ? "editSubtitle" : "createSubtitle")
+                    .font(.caption)
+                    .foregroundColor(Color(UIColor.systemGray))
+                    .padding(.bottom, 30)
                 Picker(selection: self.$sizeType, label: Text("Picker")) {
                     Text("round").tag(SizeType.Round)
                     Text("rectangular").tag(SizeType.Rectangular)
                 }
                 .pickerStyle(SegmentedPickerStyle())
+                .padding(.bottom, 30)
                 if self.sizeType == SizeType.Round {
                     TextField("diameter", text: self.$diameter)
                         .keyboardType(.numberPad)
+                        .onReceive(Just(self.diameter)) { newValue in
+                            if let range = newValue.range(of: #"[0-9]{1,4}"#, options: .regularExpression) {
+                                self.diameter = String(newValue[range])
+                            } else {
+                                self.diameter = ""
+                            }
+                        }
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 if self.sizeType == SizeType.Rectangular {
                     TextField("width", text: self.$width)
                         .keyboardType(.numberPad)
+                        .onReceive(Just(self.width)) { newValue in
+                            if let range = newValue.range(of: #"[0-9]{1,4}"#, options: .regularExpression) {
+                                self.width = String(newValue[range])
+                            } else {
+                                self.width = ""
+                            }
+                        }
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
                     TextField("height", text: self.$height)
                         .keyboardType(.numberPad)
+                        .onReceive(Just(self.height)) { newValue in
+                            if let range = newValue.range(of: #"[0-9]{1,4}"#, options: .regularExpression) {
+                                self.height = String(newValue[range])
+                            } else {
+                                self.height = ""
+                            }
+                        }
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
-                Button("save") {
-                    if self.isEditing {
-                        updateItem()
-                    } else {
-                        addItem()
+                HStack {
+                    Spacer()
+                    VStack {
+                        Text("Save")
+                            .font(.headline)
                     }
-                    
-                    if let onDismiss = self.onDismiss {
-                        onDismiss()
+                    .frame(width: 335, height: 50)
+                    .background(self.canSave ? Color("AccentColor") : Color(UIColor.systemGray3))
+                    .cornerRadius(12)
+                    Spacer()
+                }
+                .padding(.top, 60)
+                .onTapGesture {
+                    if self.canSave {
+                        if self.isEditing {
+                            updateItem()
+                        } else {
+                            addItem()
+                        }
+                        
+                        if let onDismiss = self.onDismiss {
+                            onDismiss()
+                        }
                     }
                 }
                 Spacer()
             }
             .padding()
-            .background(Color(UIColor.systemGray6))
-        }
     }
     
     private func addItem() {
