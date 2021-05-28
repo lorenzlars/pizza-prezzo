@@ -21,6 +21,8 @@
 		463975C0266128E500DE6179 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463975BF266128E500DE6179 /* Calculator.swift */; };
 		463975C42661294800DE6179 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463975C22661294800DE6179 /* CalculatorView.swift */; };
 		463975C52661294800DE6179 /* SizeEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463975C32661294800DE6179 /* SizeEditView.swift */; };
+		464271FF266180B000D1B3A7 /* SupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464271FE266180B000D1B3A7 /* SupportView.swift */; };
+		4642720126618C8C00D1B3A7 /* EmailHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4642720026618C8C00D1B3A7 /* EmailHelper.swift */; };
 		4666B22226612BDC00A597E0 /* SwiftUITrackableScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 4666B22126612BDC00A597E0 /* SwiftUITrackableScrollView */; };
 /* End PBXBuildFile section */
 
@@ -55,7 +57,7 @@
 		463975922661269000DE6179 /* PizzaPrezzoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PizzaPrezzoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		463975962661269000DE6179 /* PizzaPrezzoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaPrezzoUITests.swift; sourceTree = "<group>"; };
 		463975982661269000DE6179 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		463975A92661276E00DE6179 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = PizzaPrezzo/Extensions.swift; sourceTree = SOURCE_ROOT; };
+		463975A92661276E00DE6179 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = PizzaPrezzo/Model/Extensions.swift; sourceTree = SOURCE_ROOT; };
 		463975B6266127DB00DE6179 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		463975B8266127DE00DE6179 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		463975BA266128AD00DE6179 /* PriceLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceLineView.swift; sourceTree = "<group>"; };
@@ -63,6 +65,8 @@
 		463975BF266128E500DE6179 /* Calculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		463975C22661294800DE6179 /* CalculatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		463975C32661294800DE6179 /* SizeEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeEditView.swift; sourceTree = "<group>"; };
+		464271FE266180B000D1B3A7 /* SupportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportView.swift; sourceTree = "<group>"; };
+		4642720026618C8C00D1B3A7 /* EmailHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,7 +124,6 @@
 				463975B7266127DB00DE6179 /* Localizable.strings */,
 				463975742661268E00DE6179 /* PizzaPrezzoApp.swift */,
 				4639757D2661268F00DE6179 /* Persistence.swift */,
-				463975A92661276E00DE6179 /* Extensions.swift */,
 				463975BE266128D000DE6179 /* Model */,
 				463975B92661286700DE6179 /* Components */,
 				463975C12661294000DE6179 /* Views */,
@@ -167,7 +170,9 @@
 		463975BE266128D000DE6179 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				463975A92661276E00DE6179 /* Extensions.swift */,
 				463975BF266128E500DE6179 /* Calculator.swift */,
+				4642720026618C8C00D1B3A7 /* EmailHelper.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 			children = (
 				463975C22661294800DE6179 /* CalculatorView.swift */,
 				463975C32661294800DE6179 /* SizeEditView.swift */,
+				464271FE266180B000D1B3A7 /* SupportView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -318,6 +324,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				464271FF266180B000D1B3A7 /* SupportView.swift in Sources */,
+				4642720126618C8C00D1B3A7 /* EmailHelper.swift in Sources */,
 				463975BB266128AD00DE6179 /* PriceLineView.swift in Sources */,
 				463975BD266128B100DE6179 /* ResultLineView.swift in Sources */,
 				463975B12661276E00DE6179 /* Extensions.swift in Sources */,
@@ -496,6 +504,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"PizzaPrezzo/Preview Content\"";
 				DEVELOPMENT_TEAM = YSTPDNSA95;
 				ENABLE_PREVIEWS = YES;
@@ -505,7 +514,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.larslorenz.PizzaPrezzo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -519,6 +528,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"PizzaPrezzo/Preview Content\"";
 				DEVELOPMENT_TEAM = YSTPDNSA95;
 				ENABLE_PREVIEWS = YES;
@@ -528,7 +538,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.larslorenz.PizzaPrezzo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

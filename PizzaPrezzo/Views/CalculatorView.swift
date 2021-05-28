@@ -110,10 +110,8 @@ struct CalculatorView: View {
                 })
                 .padding(.top, 8)
                 .sheet(isPresented: self.$showingSupport, content: {
-                    
+                    SupportView()
                 })
-                .disabled(true)
-                .opacity(0)
             }
             .padding(.top)
             .zIndex(1)
