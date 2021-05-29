@@ -62,16 +62,8 @@ struct SizeEditView: View {
     }
 
     var body: some View {
+        ModalView {
             VStack(alignment: .leading) {
-                HStack {
-                    Spacer()
-                    Rectangle()
-                        .frame(width: 60, height: 6)
-                        .cornerRadius(.infinity)
-                        .foregroundColor(Color(UIColor.systemGray4))
-                    Spacer()
-                }
-                .padding(.bottom, 50)
                 Text(self.isEditing ? "editTitle" : "createTitle")
                     .font(.largeTitle)
                     .fontWeight(.bold)
@@ -121,16 +113,14 @@ struct SizeEditView: View {
                 }
                 HStack {
                     Spacer()
-                    VStack {
-                        Text("Save")
-                            .font(.headline)
-                    }
-                    .frame(width: 335, height: 50)
-                    .background(self.canSave ? Color("AccentColor") : Color(UIColor.systemGray3))
-                    .foregroundColor(self.canSave ? .black : Color(UIColor.label))
-                    .cornerRadius(12)
+                    Text("save")
+                        .font(.headline)
                     Spacer()
                 }
+                .frame(height: 50)
+                .background(self.canSave ? Color("AccentColor") : Color(UIColor.systemGray3))
+                .foregroundColor(self.canSave ? .black : Color(UIColor.label))
+                .cornerRadius(12)
                 .padding(.top, 60)
                 .onTapGesture {
                     if self.canSave {
@@ -147,7 +137,8 @@ struct SizeEditView: View {
                 }
                 Spacer()
             }
-            .padding()
+            .padding(.horizontal)
+        }
     }
     
     private func addItem() {

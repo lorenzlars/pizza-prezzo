@@ -1,3 +1,10 @@
+
+/**/
+"aboutMe" = "About me";
+
+/**/
+"appSubtitle" = "Calculate the best price";
+
 /*
   Localizable.strings
   Pizza Calculator
@@ -6,21 +13,91 @@
   
 */
 "appTitle" = "Pizza Prezzo";
-"appSubtitle" = "Calculate the best price";
-"editTitle" = "Edit Size";
-"editSubtitle" = "Edit the size of this pizza";
-"createTitle" = "Create Size";
-"createSubtitle" = "Create a new pizza size";
-"price" = "Price";
-"emptyResults" = "No results";
-"edit" = "Edit";
-"done" = "Done";
-"results" = "Results";
-"round" = "Round";
-"rectangular" = "Rectangular";
-"diameter" = "Diameter";
-"width" = "Width";
-"height" = "Height";
-"save" = "Save";
-"support" = "Support";
+
+/**/
 "area" = "Area";
+
+/**/
+"buyMeAPizza" = "Buy me a pizza";
+
+/**/
+"close" = "Close";
+
+/**/
+"createSize" = "Create size";
+
+/**/
+"createSizeDescription" = "You can create your custom pizza sizes. Round and rectangular shapes are possible.";
+
+/**/
+"createSubtitle" = "Create a new pizza size";
+
+/**/
+"createTitle" = "Create Size";
+
+/**/
+"diameter" = "Diameter";
+
+/**/
+"done" = "Done";
+
+/**/
+"edit" = "Edit";
+
+/**/
+"editSize" = "Edit size";
+
+/**/
+"editSizeDescription" = "All of your created sizes can be edited by touching the edit button in the upper left.";
+
+/**/
+"editSubtitle" = "Edit the size of this pizza";
+
+/**/
+"editTitle" = "Edit Size";
+
+/**/
+"emptyResults" = "No results";
+
+/**/
+"feedback" = "Feedback";
+
+/**/
+"height" = "Height";
+
+/**/
+"introduction" = "Introduction";
+
+/**/
+"introductionDescription" = "Just create the pizza sizes which you want to compare. Pizza Prezzo shows you the information to compare the prices.";
+
+/**/
+"introductionTitle" = "Welcome to Pizza Prezzo";
+
+/**/
+"price" = "Price";
+
+/**/
+"rectangular" = "Rectangular";
+
+/**/
+"results" = "Results";
+
+/**/
+"round" = "Round";
+
+/**/
+"save" = "Save";
+
+/**/
+"support" = "Support";
+
+/**/
+"supportDescription" = "I am a software architect and developer specializing in Web-Development. My passion is about creating remarkable user experiences, designing beautiful APIs and user interfaces, and writing maintainable code. I expand my skills and learn new technologies continuously.";
+
+/**/
+"supportSubtitle" = "Hi, my name is Lars Lorenz";
+
+/**/
+"width" = "Width";
+
