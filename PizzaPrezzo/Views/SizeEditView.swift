@@ -150,7 +150,11 @@ struct SizeEditView: View {
                     newItem.id = UUID().uuidString
                     newItem.diameter = NSNumber(value: diameter)
                     
-                    try! viewContext.save()
+                    do {
+                        try viewContext.save()
+                    } catch(let exception) {
+                        print(exception.localizedDescription)
+                    }
                 }
             } else if (self.sizeType == SizeType.Rectangular) {
                 if let width = Double(self.width), let height = Double(self.height) {
@@ -160,7 +164,11 @@ struct SizeEditView: View {
                     newItem.width = NSNumber(value: width)
                     newItem.height = NSNumber(value: height)
 
-                    try! viewContext.save()
+                    do {
+                        try viewContext.save()
+                    } catch(let exception) {
+                        print(exception.localizedDescription)
+                    }
                 }
             }
         }

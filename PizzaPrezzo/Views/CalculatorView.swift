@@ -116,7 +116,7 @@ struct CalculatorView: View {
             .padding(.top)
             .zIndex(1)
             .onChange(of: self.scrollViewContentOffset) { Equatable in
-                if self.scrollViewContentOffset > 25 {
+                if self.scrollViewContentOffset != 0 {
                     hideKeyboard()
                 }
             }
