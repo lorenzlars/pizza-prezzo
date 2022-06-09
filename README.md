@@ -6,3 +6,5 @@ Can't choose which pizza you'd like to order because you just want to make the b
 [Download](https://apps.apple.com/us/app/pizza-prezzo/id1569803251)
 
 ![App Image](pizza-prezzo-iphone.png)
+
+[Terms](terms.md)
